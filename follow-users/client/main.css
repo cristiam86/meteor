@@ -1,0 +1,21 @@
+/* CSS declarations go here */
+
+.navbar {
+  border-radius: 0 !important;
+}
+.navbar-brand {
+  color: #cacaca !important;
+}
+
+#login-buttons .login-link-text {
+  text-decoration: none;
+  color: white;
+}
+
+ul.list-group {
+  margin-top: 10px;
+}
+
+ul.list-group span {
+  font-weight: 600;
+}

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <a class="navbar-brand">Follow Users</a>
+        <ul class="nav navbar-nav">
+            <li>
+                <a>
+                    <login-buttons></login-buttons>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div ng-show="$ctrl.currentUser" class="container row">
+    <section class="col-sm-6">
+        <header>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Filters Users</span>
+                <input ng-model="$ctrl.search" type="text" name="text" placeholder="Type to search user" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <span class="label label-default">Found {{($ctrl.users | filter: $ctrl.search).length - ($ctrl.following | filter: $ctrl.search).length}} new users </span>
+        </header>
+        <ul ng-if="$ctrl.following.length === 0" class="list-group">
+            <li ng-repeat="user in $ctrl.users | filter: $ctrl.search" class="list-group-item">
+                <button ng-click="$ctrl.addFollower(user)" type="button" class="btn btn-sm btn-primary">Follow</button>
+                <span>{{user.emails[0].address}}</span>
+            </li>
+        </ul>
+        <ul ng-if="$ctrl.following.length > 0" class="list-group">
+            <li ng-if="$ctrl.checkFollow($ctrl.following, user)" ng-repeat="user in $ctrl.users | filter: $ctrl.search" class="list-group-item">
+                <button ng-click="$ctrl.addFollower(user)" type="button" class="btn btn-sm btn-primary">Follow</button>
+                <span>{{user.emails[0].address}}</span>
+            </li>
+        </ul>
+    </section>
+    <section class="col-sm-6" ng-show="$ctrl.following.length > 0">
+        <header>
+            <h4 class="text-center text-primary">Following</h4>
+        </header>
+        <ul class="list-group">
+            <li ng-repeat="user in $ctrl.following" class="list-group-item">
+                <button ng-click="$ctrl.removeFollower(user)" type="button" class="btn btn-sm btn-warning">Not Follow</button>
+                <span>{{user.email}}</span>
+            </li>
+        </ul>
+    </section>
+</div>
